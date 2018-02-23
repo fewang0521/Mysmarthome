@@ -13,7 +13,7 @@ import com.mysql.jdbc.Statement;
 public class Databasefunction {
 
 	void sql_run(String parameter, int input_values, String status){
-		//test
+		//test for db
 		String url ="jdbc:mysql://localhost:3306/java_test";
 		String id = "root";
 		String pass ="123600";
