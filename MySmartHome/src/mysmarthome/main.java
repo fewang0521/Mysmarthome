@@ -7,13 +7,15 @@ public class main {
 		// TODO Auto-generated method stub
 		Serialfunction port =new Serialfunction();
 		Databasefunction db = new Databasefunction();
+		
 
 		port.serialconnect("COM5");
-		port.commandsend('r');
+		port.commandsend('t');
 		port.commandreceive();
 		port.serialclose();
-		db.dbwrite(new String(port.save,0,0,port.buffer_index-1));
-		db.sql_run("t_para", 1, "succes");
+		String value = new String(port.save,0,0,port.buffer_index-1);
+		int int_value = Integer.parseInt(value);
+		db.sql_run("temp", int_value, "succes");
 		System.exit(1);
 		
 
