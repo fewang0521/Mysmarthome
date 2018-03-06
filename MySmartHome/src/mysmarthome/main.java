@@ -31,7 +31,7 @@ public class main {
 			case "temp": 
 						
 				port.serialconnect("COM5");
-				port.commandsend('r');
+				port.commandsend('t');
 				port.commandreceive();
 				port.serialclose();
 				value = new String(port.save,0,0,port.buffer_index-1);
@@ -42,7 +42,7 @@ public class main {
 			case "humidity": 
 				
 				port.serialconnect("COM5");
-				port.commandsend('r');
+				port.commandsend('h');
 				port.commandreceive();
 				port.serialclose();
 				value = new String(port.save,0,0,port.buffer_index-1);
