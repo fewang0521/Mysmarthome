@@ -5,6 +5,7 @@ public class main {
 	
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
+		/*
 		if ((args.length)==0){
 			System.out.println("please enter args");
 		}
@@ -50,8 +51,12 @@ public class main {
 				db.sql_run("humidity", int_value, "sucess");
 				System.exit(1);	
 			}			
-		}
+		}*/
+		
+		Databasefunction db = new Databasefunction();
+		db.sql_read("light");
 
 	}
+	
 
 }
