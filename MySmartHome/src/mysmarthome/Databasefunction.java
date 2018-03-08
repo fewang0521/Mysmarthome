@@ -89,11 +89,69 @@ public class Databasefunction {
 	}
 
 
-void dbwrite(String input) throws IOException{
-	FileOutputStream output = new FileOutputStream("C:/Apache24/htdocs/light_status.txt");
-	String data = input;
-	output.write(data.getBytes());
-	output.close();
-}
+	void sql_read(String parameter){
+		//test today before java
+		String para=parameter;
+		String url ="jdbc:mysql://localhost:3306/java_test";
+		String id = "root";
+		String pass ="123600";
+		Statement stmt =null;
+		ResultSet rs =null;
+		String query_show_parameter = "select * from sensor_values where parameter=?";
+		String query_show = "select * from sensor_values";
+
+		Connection conn =null;
+		PreparedStatement pstmt= null;
+		boolean parameter_exist =false;
+
+		//System.out.println(query_insert_total);
+
+		try{
+			conn= (Connection) DriverManager.getConnection(url,id,pass);
+			System.out.println("연결 성공");
+			stmt = (Statement) conn.createStatement();
+			rs=stmt.executeQuery(query_show);
+			
+			//check whether parameter already exist
+			while(rs.next()){
+				if (parameter.compareTo(rs.getString(1))==0){
+					parameter_exist=true;
+					break;
+				}
+				else{
+				}
+
+			}
+			if (parameter_exist){
+				//update
+				pstmt = conn.prepareStatement(query_show_parameter);
+				pstmt.setString(1, para);
+				rs= pstmt.executeQuery();
+			}
+			else{
+				//no parameter
+				System.out.println("Parameter does not exist in the table");
+			}
+			
+			while(rs.next()){
+				System.out.println(rs.getString(1) + " :" + rs.getInt(2) +":"+rs.getString(3));
+			}
+			rs.close();
+			stmt.close();
+			pstmt.close();
+			conn.close();
+
+		}catch(SQLException ee){
+			System.err.println("SQL Error =" + ee.toString());
+		}
+
+	}
+
+	void dbwrite(String input) throws IOException{
+		FileOutputStream output = new FileOutputStream("C:/Apache24/htdocs/light_status.txt");
+		String data = input;
+		output.write(data.getBytes());
+		output.close();
+	}
 
 }
